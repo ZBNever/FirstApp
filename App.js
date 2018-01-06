@@ -12,8 +12,7 @@ import {
   View
 } from 'react-native';
 
-import HelloComponent from './HelloComponent';
-
+import LifeCycleComponent from './LifeCycleComponent';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -23,13 +22,32 @@ const instructions = Platform.select({
 });
 
 export default class App extends Component<{}> {
+
+  constructor(props){
+    super(props);
+      this.state=({
+          remove:false
+      })
+  }
+
   render() {
+    var view=this.state.remove?null:<LifeCycleComponent/>;
+    var text=this.state.remove?'让他复活':'移除他';
     return (
       <View style={styles.container}>
-        <HelloComponent
-        name = '小米'
-        />
+
+        <Text
+          style={{fontSize:20}}
+          onPress={()=>{
+           this.setState({
+                   remove:!this.state.remove
+               })
+          }}
+        >{text}</Text>
+
+          {view}
       </View>
+
     );
   }
 }
