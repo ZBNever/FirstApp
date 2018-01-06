@@ -12,40 +12,35 @@ import {
   View
 } from 'react-native';
 
-import LifeCycleComponent from './LifeCycleComponent';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import EIComponent,{name,age,sum} from './EIComponent';
 
 export default class App extends Component<{}> {
 
   constructor(props){
     super(props);
       this.state=({
-          remove:false
+          remove:false,
+          result:''
       })
   }
 
   render() {
-    var view=this.state.remove?null:<LifeCycleComponent/>;
-    var text=this.state.remove?'让他复活':'移除他';
+
     return (
       <View style={styles.container}>
-
-        <Text
-          style={{fontSize:20}}
-          onPress={()=>{
-           this.setState({
-                   remove:!this.state.remove
-               })
-          }}
-        >{text}</Text>
-
-          {view}
+          <Text style={{fontSize:20}}>名字:{name}</Text>
+          <Text style={{fontSize:20}}>年龄:{age}</Text>
+          <Text
+            style={{fontSize:20}}
+            onPress={()=>{
+             var result = sum(2,3);
+             this.setState(
+                 {
+                     result:result,
+                 }
+             )
+            }}
+          >2+3={this.state.result}</Text>
       </View>
 
     );
